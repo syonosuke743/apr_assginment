@@ -2,7 +2,7 @@ class Deck # デッキを作って、カードを混ぜて、カードを引く�
 attr_accessor :cards
 
   def initiaize # Deckクラスを初期化
-  @card = deck_make #デッキを作る
+  @cards = deck_make #デッキを作る
   end
 
   def deck_make #デッキを作って混ぜる。
@@ -13,7 +13,7 @@ attr_accessor :cards
     #marksの要素と引数、valueの要素と引数をそれぞれ合わせた配列をproductメソッドで作る。Cardクラスのインスタンスをシャッフルする。
   end
 
-  def drow #カードを引く
-    card.pop #popで配列の末尾を消す。重複を防ぐ。
+  def draw #カードを引く
+    cards.pop #popで配列の末尾を消す。重複を防ぐ。
   end
 end
