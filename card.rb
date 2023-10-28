@@ -1,5 +1,5 @@
 class Card #カードの値とマークを管理して、カードの情報を表示する。
-attr_accessor :value, :suits
+attr_accessor :value, :marks
 
 def  initialize(value, marks)#Cardクラスの初期化
   @value = value

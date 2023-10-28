@@ -15,7 +15,7 @@ class Hand
     total = cards.inject(0) do |num, card| #injectメソッドに初期値をいれ、cards配列の数値をそれぞれ足していく。
       if cards.value == 'A' #もしcordsにAがはいっていたら
         ace += 1 #Aのカウントを+１する。
-        num + card.point # 今の合計ポイントにカードのポイントを加算
+        num + card.point #今の合計ポイントにカードのポイントを加算ポイントはCardクラスで定義
       end
 
       ace.times {total -= 10 if total >21} #ハンドがAAAAの場合、11+1+1+1としなければならない。2枚目以降のAは-10しなければならない。
