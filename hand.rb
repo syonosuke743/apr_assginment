@@ -1,32 +1,30 @@
 class Hand
-  attr_accessor :cards
+  attr_accessor :cards  # 手札のカードのアクセサを定義
 
-  def initialize #Handクラスの初期化
-    @cards = [] #配列を用意する
+  def initialize  # Handクラスの初期化
+    @cards = []
   end
 
-  def add_card(card) #手札にカードを追加する
-    cards << card #cardsの配列に引数cardを追加する
+  def add_card(card)  # 手札にカードを追加するメソッド
+    cards << card
   end
 
-  def total_point #ハンドの合計を計算する
-    ace = 0 #エースの数をカウントする変数を初期化
-
-    total = cards.inject(0) do |num, card| #injectメソッドに初期値をいれ、cards配列の数値をそれぞれ足していく。
-      if cards.value == 'A' #もしcordsにAがはいっていたら
-        ace += 1 #Aのカウントを+１する。
-        num + card.point #今の合計ポイントにカードのポイントを加算ポイントはCardクラスで定義
-      end
-
-      ace.times {total -= 10 if total >21} #ハンドがAAAAの場合、11+1+1+1としなければならない。2枚目以降のAは-10しなければならない。
-                                           #CardクラスでAは11点と定義しているためAAの時点で22になってしまう。
-                                           #そこで、21点を超えた場合、totalから10を引くことによって、２枚目以降のAが1として処理できる。
-                                           #aceの値のカウント分ループを繰り返せば、Aは21未満なので11、AAは22以上なので-10で11となる。
-      total #最終の合計ポイントを出す。
-  end
-
-    def card_bust #ハンドがバーストしているかの判定
-      total_point <21
+  def points # 手札の合計ポイントを計算するメソッド
+    ace = 0  # エースの数をカウントするための変数を初期化
+  
+    # cards配列（手札）にあるすべてのカードに対して、合計ポイントを計算
+    total = cards.inject(0) do |num, card| #injectでカード配列の初期値を0にしてnumとcardを足していく。
+      ace += 1 if card.value == 'A'  # カードがエースの時、エースの数を1増やす
+      num + card.point  # カードのポイントを足す。
     end
+  
+    # 引いたカードがAAAAの場合、CardクラスでA＝11と定義しているので、AAの時点でバーストする。
+    # Aをカウントして、合計が21以下ならAは11、22以上ならAを-10することによって、AAの場合は11+1、AAAAの場合は11+1+1+1となる。
+    ace.times { total -= 10 if total > 21 }
+    total  # 最終的な合計ポイントを返す
+  end
+
+  def bust?  # 手札がバーストしているかどうかを判定するメソッド
+    points > 21
   end
 end
