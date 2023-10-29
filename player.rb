@@ -1,13 +1,11 @@
 class Player
-  attr_accessor :hand #プレイヤーのハンドを読み取る
+  attr_reader :hand  # プレイヤーの手札の読み取り専用アクセサを定義
 
-  def initiaize #Playerクラスの初期化
+  def initialize  # Playerクラスの初期化
     @hand = Hand.new
   end
 
-  def add_hand(card)
-    hand.add_card(card) # Handクラスで定義した手札にカードを追加するメソッドを使う。
+  def hit(card)  # プレイヤーがカードをヒットする
+    hand.add_card(card)
   end
 end
-
-
